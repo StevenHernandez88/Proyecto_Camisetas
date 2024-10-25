@@ -1,0 +1,5 @@
+#aqui van todos los de node que no se suben al repositorio
+.env
+node_modules/
+/build/
+

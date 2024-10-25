@@ -1,0 +1,123 @@
+Select * from modelo;
+
+Select * from cliente;
+
+Select * from ratings;
+
+Select * from usuarios;
+
+Select * from camisetas;
+
+Select * from detallespedidos;
+
+
+SELECT rating FROM ratings WHERE modelo_id = 1;
+
+
+UPDATE modelo
+SET stock = 90
+WHERE idmodelo = 1;
+
+
+SELECT r.rating, r.comentario, r.fecha_rating, u.nombre
+                FROM ratings r
+                JOIN usuarios u ON r.cliente_id = u.idusuario
+                WHERE r.modelo_id = 1
+                ORDER BY r.fecha_rating DESC
+
+INSERT INTO estado (descripcionestado) VALUES 
+('Pendiente'),
+('Confirmado'),
+('En proceso'),
+('En envío'),
+('Entregado'),
+('Finalizado'),
+('Rechazado');
+
+
+
+
+-- Insertar categorías en la tabla categoria
+INSERT INTO categoria (idCategoria, descripcion) VALUES (1, 'terror');
+INSERT INTO categoria (idCategoria, descripcion) VALUES (2, 'comedia');
+INSERT INTO categoria (idCategoria, descripcion) VALUES (3, 'romance');
+INSERT INTO categoria (idCategoria, descripcion) VALUES (4, 'aventura');
+INSERT INTO categoria (idCategoria, descripcion) VALUES (5, 'fantasía');
+INSERT INTO categoria (idCategoria, descripcion) VALUES (6, 'ciencia ficción');
+INSERT INTO categoria (idCategoria, descripcion) VALUES (7, 'acción');
+INSERT INTO categoria (idCategoria, descripcion) VALUES (8, 'drama');
+INSERT INTO categoria (idCategoria, descripcion) VALUES (9, 'musical');
+INSERT INTO categoria (idCategoria, descripcion) VALUES (10, 'histórico');
+INSERT INTO categoria (idCategoria, descripcion) VALUES (11, 'deporte');
+INSERT INTO categoria (idCategoria, descripcion) VALUES (12, 'animación');
+INSERT INTO categoria (idCategoria, descripcion) VALUES (13, 'arte');
+INSERT INTO categoria (idCategoria, descripcion) VALUES (14, 'naturaleza');
+INSERT INTO categoria (idCategoria, descripcion) VALUES (15, 'viajes');
+INSERT INTO categoria (idCategoria, descripcion) VALUES (16, 'abstracto');
+INSERT INTO categoria (idCategoria, descripcion) VALUES (17, 'retro');
+INSERT INTO categoria (idCategoria, descripcion) VALUES (18, 'futurista');
+INSERT INTO categoria (idCategoria, descripcion) VALUES (19, 'anime');
+INSERT INTO categoria (idCategoria, descripcion) VALUES (20, 'videojuegos');
+INSERT INTO categoria (idCategoria, descripcion) VALUES (21, 'superhéroes');
+
+
+
+INSERT INTO rol (idrol, funcion) VALUES (1, 'administrador');
+INSERT INTO rol (idrol, funcion) VALUES (2, 'cliente');
+INSERT INTO rol (idrol, funcion) VALUES (3, 'artista');
+
+
+
+SELECT e.*, u.nombre AS artista_nombre, c.descripcion AS categoria_descripcion
+FROM estampas e
+JOIN usuarios u ON e.artista_id = u.idusuario
+JOIN categoria c ON e.categoria_id = c.idCategoria
+
+
+
+SELECT e.*, u.nombre AS artista_nombre, c.descripcion AS categoria_descripcion
+                FROM estampas e
+                JOIN usuarios u ON e.artista_id = u.idusuario
+                JOIN categoria c ON e.categoria_id = c.idCategoria
+                WHERE 
+                    LOWER(e.nombre) LIKE LOWER(1) OR
+                    LOWER(u.nombre) LIKE LOWER(1) OR
+                    LOWER(c.descripcion) LIKE LOWER(1)
+
+Select * from usuarios;
+
+Select * from cliente;
+
+Select * from rol;
+
+Select * from artista;
+
+Select * from camisetas;
+
+
+Select u.idusuario, u.nombre, u.email, u.contraseña, u.fecha_creacion, 
+       cl.direccion, cl.telefono, r.funcion, cam.talla, cam.precio, es.url_imagen, 
+       mol.url_modelo
+from usuarios u, cliente cl, rol r, pedidos pe, detallespedidos dp, camisetas cam,
+     estampas es, modelo mol
+where u.idusuario = cl.idcliente and
+      u.rol_id = r.idrol and
+      cl.idcliente = pe.cliente_id and
+      pe.idpedidos = dp.pedido_id and
+      cam.idcamisetas = ANY(dp.camisetas) and
+      cam.estampa_id = es.idestampas and
+      cam.modelo_id = mol.idmodelo;
+
+
+	  
+Select u.idusuario, u.nombre, u.email, u.contraseña, u.fecha_creacion, 
+ar.biografia, r.funcion, es.nombre AS nombreestampa, es.descripcion AS descripcionestampa, es.url_imagen, 
+cat.descripcion AS descripcioncategoria
+from usuarios u, artista ar, rol r, estampas es, categoria cat
+where u.idusuario = ar.idartista and
+      u.rol_id = r.idrol and
+	  ar.idartista = es.artista_id and
+	  es.categoria_id = cat.idcategoria;
+
+
+Select * from estampas;
