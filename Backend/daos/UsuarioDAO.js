@@ -58,6 +58,19 @@ class UsuarioDAO {
             throw new Error('Error interno del servidor');
         }
     }
+
+    async cambiarContraseña(email, contraseña) {
+        try {
+            await db.query(
+                'UPDATE usuarios SET contraseña = $1 WHERE email = $2', 
+                [contraseña, email]
+            );
+            console.log('Contraseña actualizada');
+        } catch (error) {
+            console.error('Error al cambiar contraseña', error.message, error.stack);
+            throw new Error('Error interno del servidor');
+        }
+    }
 }
 
 module.exports = UsuarioDAO;

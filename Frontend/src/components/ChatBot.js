@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { MessageCircle, X } from 'lucide-react';
+import 'boxicons/css/boxicons.min.css'; // Importa los estilos de Boxicons
+import { X } from 'lucide-react';
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,14 +50,14 @@ const ChatBot = () => {
     } else if (lowerMessage.includes('información general') || lowerMessage.includes('empresa') || lowerMessage.includes('quienes son ustedes')) {
       botResponse = storeInfo.generalInfo;
     } else if (lowerMessage.includes('cantidad maxima') || lowerMessage.includes('maxima')) {
-      botResponse = `La cantidad maxima de camisetas es de 100 camisetas`;
-    }else if (lowerMessage.includes('estampado') || lowerMessage.includes('estampado personalizado') || lowerMessage.includes('personalizado') || lowerMessage.includes('personalizar')){
-      botResponse = `Claro que si, puedes personalizar los modelos con las estampas de los artistas`;
-    }else if (lowerMessage.includes('escoger estampas') || lowerMessage.includes('estampas propias') || lowerMessage.includes('mis propias estampas') || lowerMessage.includes('las mias')){
-      botResponse = `Lamentablemente solamente se pueden seleccionar estampas de artistas, sin embargo hay diseños muy bonitos`;
-    }else if (lowerMessage.includes('poner estampas') || lowerMessage.includes('incluir estampas') || lowerMessage.includes('poner mis estampas')){
-      botResponse = `Claro que si, pero tienes que ser un artista con bastante experiencia`;
-    }else {
+      botResponse = `La cantidad máxima de camisetas es de 100 camisetas.`;
+    } else if (lowerMessage.includes('estampado') || lowerMessage.includes('estampado personalizado') || lowerMessage.includes('personalizado') || lowerMessage.includes('personalizar')) {
+      botResponse = `Claro que sí, puedes personalizar los modelos con las estampas de los artistas.`;
+    } else if (lowerMessage.includes('escoger estampas') || lowerMessage.includes('estampas propias') || lowerMessage.includes('mis propias estampas') || lowerMessage.includes('las mias')) {
+      botResponse = `Lamentablemente solo se pueden seleccionar estampas de artistas. Sin embargo, hay diseños muy bonitos.`;
+    } else if (lowerMessage.includes('poner estampas') || lowerMessage.includes('incluir estampas') || lowerMessage.includes('poner mis estampas')) {
+      botResponse = `Claro que sí, pero tienes que ser un artista con bastante experiencia.`;
+    } else {
       botResponse = storeInfo.contact;
     }
 
@@ -97,7 +98,7 @@ const ChatBot = () => {
         </div>
       )}
       <button onClick={toggleChat} className="chat-icon">
-        <MessageCircle size={24} />
+        <i class='bx bxs-chat' ></i> 
       </button>
     </div>
   );

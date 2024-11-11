@@ -1,6 +1,6 @@
-function generarPassword(idUsuario, nombre) {
+function generarPassword(idusuario, nombre) {
     const primeraLetraNombre = nombre.charAt(0);
-    const password = `${idUsuario}${primeraLetraNombre}`;
+    const password = `${idusuario}${primeraLetraNombre}`;
     return password;
   }
   

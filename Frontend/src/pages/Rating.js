@@ -36,7 +36,7 @@ function Rating() {
   };
 
   return (
-    <div>
+    <div className='rating-container'>
       <h1>Califica tu compra</h1>
       {models.map(model => (
         <div key={model.modelId}>

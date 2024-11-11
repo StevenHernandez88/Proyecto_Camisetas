@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 const { google } = require('googleapis');
 const config = require('./Config');
+
 const logger = require('./logger');
 
 const oAuth2Client = new google.auth.OAuth2(
@@ -91,8 +92,42 @@ async function enviarCorreoPago(email, pdfBase64) {
   }
 }
 
+async function enviarCorreoRecuperacion(email, codigo) {
+
+  try {
+    const accessToken = await oAuth2Client.getAccessToken();
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        type: 'OAuth2',
+        user: config.correo,
+        clientId: config.CLIENT_ID,
+        clientSecret: config.CLIENT_SECRET,
+        refreshToken: config.REFRESH_TOKEN,
+        accessToken: accessToken.token,
+      },
+      tls: {
+        rejectUnauthorized: false, // Ignorar certificados autofirmados
+      },
+    });
+
+    const mailOptions = {
+      from: config.correo,
+      to: email,
+      subject: 'Código de verificacion',
+      text: `El código es: ${codigo}`
+    };
+
+    const info = await transporter.sendMail(mailOptions);
+    //console.log('Correo enviado:', info.response);
+  } catch (error) {
+    console.error('Error al enviar correo:', error);
+  }
+}
 
 module.exports = {
   enviarCorreo,
-  enviarCorreoPago
+  enviarCorreoPago,
+  enviarCorreoRecuperacion
 };

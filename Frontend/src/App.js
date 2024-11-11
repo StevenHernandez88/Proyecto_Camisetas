@@ -23,6 +23,10 @@ import { DataProvider } from './services/DataProvider';
 import PerfilHistorialCompra from './pages/PerfilHistorialCompra';
 import PerfilEstampasSubidas from './pages/PerfilEstampasSubidas';
 
+
+import RecuperarContraseña from './pages/RecuperarContraseña';
+import CambiarContraseña from './pages/CambiarContraseña';
+
 function App() {
   return (
     // Envuelve toda la aplicación dentro de DataProvider
@@ -44,6 +48,8 @@ function App() {
               <Route path="/uploadModel" element={<UploadModel/>} />
               <Route path="/perfilHistorialCompra" element={<PerfilHistorialCompra/>} />
               <Route path="/perfilEstampasSubidas" element={<PerfilEstampasSubidas/>} />
+              <Route path="/recuperarContraseña" element={<RecuperarContraseña/>} />
+              <Route path="/cambiarContraseña" element={<CambiarContraseña/>} />
             </Routes>
           </div>
         </div>

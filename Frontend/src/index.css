@@ -263,8 +263,8 @@ header .cart span {
     border-radius: 5px;
   }
   
-  /*----- LOGIN -----*/
-/* Estilos principales del formulario de login */
+/*----- LOGIN -----*/
+
 .login {
   width: 100%;
   max-width: 450px;
@@ -342,6 +342,21 @@ header .cart span {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(59, 193, 248, 0.2);
 }
+
+.forgot-password {
+  display: block;
+  color: #3bc1f8;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 15px;
+  transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+  color: #2a99c9;
+  text-decoration: underline;
+}
+
 
 /* Mejora de la accesibilidad en móviles */
 @media (max-width: 576px) {
@@ -1435,4 +1450,310 @@ button:hover {
   padding: 5px 15px;
   border-radius: 20px;
   cursor: pointer;
+}
+
+/*----- RATING -----*/
+
+.rating-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 80px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.rating-container:hover {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.rating-container h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 26px;
+  color: #333;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.rating-item {
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.rating-item h2 {
+  font-size: 20px;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.rating-item img {
+  width: 150px;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.star-rating {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+.star-rating span {
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.star-rating span:hover {
+  color: #FFD700;
+}
+
+.rating-item textarea {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  min-height: 100px;
+  resize: vertical;
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.rating-item textarea:focus {
+  outline: none;
+  border-color: #3bc1f8;
+  box-shadow: 0 0 8px rgba(59, 193, 248, 0.2);
+}
+
+.submit-button {
+  display: block;
+  width: 100%;
+  padding: 14px 20px;
+  background-color: #3bc1f8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+.submit-button:hover {
+  background-color: #2a99c9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 193, 248, 0.2);
+}
+
+@media (max-width: 576px) {
+  .rating-container {
+    padding: 20px;
+    margin: 40px auto;
+  }
+
+  .rating-item textarea {
+    font-size: 14px;
+  }
+
+  .submit-button {
+    font-size: 16px;
+  }
+  
+  .star-rating span {
+    font-size: 20px;
+  }
+}
+
+
+
+
+
+/*----- RECUPERAR CONTRASEÑA -----*/
+.recuperar-contraseña {
+  width: 100%;
+  max-width: 450px;
+  margin: 80px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.recuperar-contraseña:hover {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.recuperar-contraseña h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 26px;
+  color: #333;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.recuperar-contraseña div {
+  margin-bottom: 20px;
+}
+
+.recuperar-contraseña label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: #666;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.recuperar-contraseña input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.recuperar-contraseña input:focus {
+  outline: none;
+  border-color: #007bff;
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+.recuperar-contraseña button {
+  width: 100%;
+  padding: 14px 20px;
+  background-color: #3bc1f8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.recuperar-contraseña button:hover {
+  background-color: #2a99c9;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(59, 193, 248, 0.2);
+}
+
+/*----- CAMBIAR CONTRASEÑA -----*/
+.cambiar-contraseña {
+  width: 100%;
+  max-width: 450px;
+  margin: 80px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.cambiar-contraseña:hover {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.cambiar-contraseña h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 26px;
+  color: #333;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.cambiar-contraseña div {
+  margin-bottom: 20px;
+}
+
+.cambiar-contraseña label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: #666;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.cambiar-contraseña input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.cambiar-contraseña input:focus {
+  outline: none;
+  border-color: #007bff;
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+.cambiar-contraseña button {
+  width: 100%;
+  padding: 14px 20px;
+  background-color: #3bc1f8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.cambiar-contraseña button:hover {
+  background-color: #2a99c9;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(59, 193, 248, 0.2);
+}
+
+.cambiar-contraseña .input-con-ico {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.cambiar-contraseña .input-con-ico input {
+  flex: 1;
+  padding-right: 40px;/* Espacio para el ícono */ 
+}
+
+.cambiar-contraseña box-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
 }
