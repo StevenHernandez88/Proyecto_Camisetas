@@ -61,7 +61,7 @@ const MostrarModelos = () => {
                     </div>
                 ))}
             </div>
-            <ChatBot />  {/* Añadimos el componente ChatBot aquí */}
+            <ChatBot /> 
         </div>
     );
 };

@@ -9,10 +9,10 @@ const bucketName = config.BUCKET;
 const bucket = storage.bucket(bucketName);
 
 class EstampaDAO {
-    async getAllEstampas() {
+    async getAllEstampasActivas() {
         try {
-            console.log('Obteniendo todas las estampas');
-            const response = await db.query('SELECT * FROM estampas');
+            //console.log('Obteniendo todas las estampas');
+            const response = await db.query('SELECT * FROM estampas where activo=true');
             return response.rows;
         } catch (error) {
             console.error('Error al obtener estampas:', error.message, error.stack);
@@ -73,6 +73,41 @@ class EstampaDAO {
             throw new Error('Error interno del servidor');
         }
     }
+
+
+
+
+
+
+
+
+
+    async getAllEstampas() {
+        try {
+            const response = await db.query('SELECT * FROM estampas');
+            return response.rows;
+        } catch (error) {
+            console.error('Error al obtener estampas con estado:', error.message, error.stack);
+            throw new Error('Error interno del servidor');
+        }
+    }
+
+    async toggleStampStatus(idestampas, activo) {
+        try {
+            const query = 'UPDATE estampas SET activo = $1 WHERE idestampas = $2 RETURNING *';
+            const response = await db.query(query, [activo, idestampas]);
+            
+            if (response.rowCount === 0) {
+                throw new Error('Estampa no encontrado');
+            }
+            
+            return response.rows[0];
+        } catch (error) {
+            console.error('Error al actualizar estado del modelo:', error.message);
+            throw error;
+        }
+    }
+
 
 }
 

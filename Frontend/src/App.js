@@ -7,16 +7,15 @@ import UploadStamp from './pages/UploadStamp';
 import RegistrarUsuario from './components/RegistrarUsuario';
 import LoginUsuario from './components/LoginUsuario';
 import Rating  from './pages/Rating';
-import UploadModel from './pages/UploadModel';
+import UploadModel from './admin/UploadModel';
 
 
 import MostrarEstampas from './pages/MostrarEstampas';
 import MostrarModelos from './pages/MostrarModelos';
 
 import Header from './components/Header';
-import Carrito from './components/Carrito'; // Mantenemos la importación
+import Carrito from './components/Carrito';
 
-// Importa el DataProvider
 import { DataProvider } from './services/DataProvider'; 
 
 
@@ -26,6 +25,11 @@ import PerfilEstampasSubidas from './pages/PerfilEstampasSubidas';
 
 import RecuperarContraseña from './pages/RecuperarContraseña';
 import CambiarContraseña from './pages/CambiarContraseña';
+
+
+
+import AdminDashboard from './admin/AdminDashboard'
+
 
 function App() {
   return (
@@ -50,6 +54,7 @@ function App() {
               <Route path="/perfilEstampasSubidas" element={<PerfilEstampasSubidas/>} />
               <Route path="/recuperarContraseña" element={<RecuperarContraseña/>} />
               <Route path="/cambiarContraseña" element={<CambiarContraseña/>} />
+              <Route path="/admin" element={<AdminDashboard/>} />
             </Routes>
           </div>
         </div>

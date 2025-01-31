@@ -26,11 +26,15 @@ export const Header = () => {
     const role = Number(rol_id); // Convertir rol_id a número
     
     if (idusuario) {
+      if(role === 1){
+        //console.log('Redirigiendo a /admin');
+        navigate('/admin');
+      }
       if (role === 2) {
-        console.log('Redirigiendo a /perfilHistorialCompra');
+        //console.log('Redirigiendo a /perfilHistorialCompra');
         navigate('/perfilHistorialCompra');
       } else if (role === 3) {
-        console.log('Redirigiendo a /perfilEstampasSubidas');
+        //console.log('Redirigiendo a /perfilEstampasSubidas');
         navigate('/perfilEstampasSubidas');
       } else {
         console.log('Rol no reconocido');

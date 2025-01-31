@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { DataContext } from "../services/DataProvider";
 import { Link  } from "react-router-dom";
+import loginImage from '../img/login.webp';
 
 const LoginUsuario = () => {
   const { handleLogin } = useContext(DataContext);
@@ -37,32 +38,39 @@ const LoginUsuario = () => {
   };
 
   return (
-    <div className="login">
-      <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Contraseña:</label>
-          <input
-            type="password"
-            name="contraseña"
-            value={formData.contraseña}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <Link to="/recuperarContraseña" className="forgot-password">¿Olvidó su contraseña?</Link>
-        <button type="submit">Iniciar Sesión</button>
-      </form>
+    <div className="login-container">
+      <div className="login-image">
+        <img src={loginImage} alt="Login" />
+      </div>
+      <div className="login">
+        <h2>Iniciar Sesión</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label>Email:</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <label>Contraseña:</label>
+            <input
+              type="password"
+              name="contraseña"
+              value={formData.contraseña}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <Link to="/recuperarContraseña" className="forgot-password">
+            ¿Olvidó su contraseña?
+          </Link>
+          <button type="submit">Iniciar Sesión</button>
+        </form>
+      </div>
     </div>
   );
 };

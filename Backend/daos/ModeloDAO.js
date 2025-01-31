@@ -13,7 +13,7 @@ class ModeloDAO {
     async getAllModelos() {
         try {
             console.log('Obteniendo todas las modelo');
-            const response = await db.query('SELECT * FROM modelo');
+            const response = await db.query('SELECT * FROM modelo where activo=true');
             return response.rows;
         } catch (error) {
             console.error('Error al obtener modelos:', error.message, error.stack);
@@ -107,6 +107,82 @@ class ModeloDAO {
         } catch (error) {
             console.error("Error al obtener stock", error);
             throw new Error("Error interno del servidor");
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    async getAllModelosWithStatus() {
+        try {
+            const query = `
+                SELECT m.*, COALESCE(AVG(r.rating), 0) as rating
+                FROM modelo m
+                LEFT JOIN ratings r ON m.idmodelo = r.modelo_id
+                GROUP BY m.idmodelo
+                ORDER BY m.idmodelo DESC
+            `;
+            const response = await db.query(query);
+            return response.rows;
+        } catch (error) {
+            console.error('Error al obtener modelos con estado:', error.message, error.stack);
+            throw new Error('Error interno del servidor');
+        }
+    }
+
+    async toggleModelStatus(idmodelo, activo) {
+        try {
+            const query = 'UPDATE modelo SET activo = $1 WHERE idmodelo = $2 RETURNING *';
+            const response = await db.query(query, [activo, idmodelo]);
+            
+            if (response.rowCount === 0) {
+                throw new Error('Modelo no encontrado');
+            }
+            
+            return response.rows[0];
+        } catch (error) {
+            console.error('Error al actualizar estado del modelo:', error.message);
+            throw error;
+        }
+    }
+
+    async getModelosOrdenadosPor(criterio) {
+        try {
+            let query;
+            if (criterio === 'rating') {
+                query = `
+                    SELECT m.*, COALESCE(AVG(r.rating), 0) as rating
+                    FROM modelo m
+                    LEFT JOIN ratings r ON m.idmodelo = r.modelo_id
+                    WHERE m.activo = true
+                    GROUP BY m.idmodelo
+                    ORDER BY rating DESC
+                `;
+            } else if (criterio === 'material') {
+                query = `
+                    SELECT m.*, COALESCE(AVG(r.rating), 0) as rating
+                    FROM modelo m
+                    LEFT JOIN ratings r ON m.idmodelo = r.modelo_id
+                    WHERE m.activo = true
+                    GROUP BY m.idmodelo
+                    ORDER BY m.material ASC
+                `;
+            }
+            
+            const response = await db.query(query);
+            return response.rows;
+        } catch (error) {
+            console.error('Error al obtener modelos ordenados:', error.message, error.stack);
+            throw new Error('Error interno del servidor');
         }
     }
 

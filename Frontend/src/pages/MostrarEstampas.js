@@ -7,7 +7,7 @@ const MostrarEstampas = () => {
     useEffect(() => {
         const fetchStamps = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/estampas/obtenerImagenes');
+                const response = await axios.get('http://localhost:3000/estampas/getEstampasActivas');
                 setStamps(response.data);
             } catch (error) {
                 console.error('Error al obtener las estampas:', error);

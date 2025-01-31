@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { DataContext } from '../services/DataProvider';
 
@@ -6,6 +6,7 @@ const UploadStamp = () => {
     const [nombre, setNombre] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [imagen, setImagen] = useState(null);
+    const [errorImagen, setErrorImagen] = useState(''); // Mensaje de error para el archivo
     const [categorias, setCategorias] = useState([]); // Categorías desde el backend
     const [categoriaId, setCategoriaId] = useState(''); // Selección de categoría
     const { idusuario } = useContext(DataContext);
@@ -24,11 +25,25 @@ const UploadStamp = () => {
     }, []);
 
     const handleFileChange = (e) => {
-        setImagen(e.target.files[0]);
+        const file = e.target.files[0];
+        const validFormats = ['image/png', 'image/jpeg']; // Formatos permitidos
+
+        if (file && validFormats.includes(file.type)) {
+            setImagen(file);
+            setErrorImagen(''); // Resetear el mensaje de error
+        } else {
+            setImagen(null);
+            setErrorImagen('Por favor, selecciona una imagen en formato PNG o JPG.');
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!imagen) {
+            setErrorImagen('Debe subir una imagen válida antes de enviar.');
+            return;
+        }
 
         const formData = new FormData();
         formData.append('nombre', nombre);
@@ -61,6 +76,7 @@ const UploadStamp = () => {
                 <label>
                     Imagen:
                     <input type="file" onChange={handleFileChange} required />
+                    {errorImagen && <p style={{ color: 'red' }}>{errorImagen}</p>}
                 </label>
                 <label>
                     Categoría:

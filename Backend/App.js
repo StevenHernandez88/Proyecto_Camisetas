@@ -16,6 +16,8 @@ const pedidosRouter = require('./routers/PedidosRouter');
 const detallesPedidosRouter = require('./routers/DetallesPedidosRouter');
 const categoriaRouter = require('./routers/CategoriaRouter');
 
+const administradorRouter = require('./routers/AdministradorRouter');
+
 
 app.use(cors({
     origin: '*', 
@@ -38,6 +40,9 @@ app.use(camisetasRouter);
 app.use(pedidosRouter);
 app.use(detallesPedidosRouter);
 app.use(categoriaRouter);
+
+
+app.use(administradorRouter);
 
 app.listen(config.PORT, () => {
     logger.info(`Server running on port ${config.PORT}`);

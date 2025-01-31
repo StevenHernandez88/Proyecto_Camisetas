@@ -43,6 +43,8 @@ CREATE TABLE estampas (
     artista_id INT,
     url_imagen TEXT,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    categoria_id INT,
+    activo BOOLEAN
 );
 
 -- Creación de la tabla de camisetas
@@ -88,7 +90,8 @@ CREATE TABLE modelo(
 	material TEXT,
     rating_id INT,
     url_modelo TEXT,
-    stock INT 
+    stock INT,
+    activo BOOLEAN
 );
 
 
