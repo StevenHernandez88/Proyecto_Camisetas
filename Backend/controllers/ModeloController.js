@@ -17,6 +17,7 @@ const crearModelo = async (req, res) => {
     try {
         const { descripcion, material, rating_id, stock} = req.body;
         const file = req.file;
+        const activo = true;
 
         if (!file) {
             return res.status(400).json({ error: 'No se ha proporcionado ningún archivo de imagen' });
@@ -25,7 +26,7 @@ const crearModelo = async (req, res) => {
         // Subir imagen a Google Cloud y obtener la URL pública
         const url_modelo = await uploadImageToGoogleCloud(file);
         
-        const modelo = { descripcion, material, rating_id, url_modelo, stock};
+        const modelo = { descripcion, material, rating_id, url_modelo, stock, activo};
 
         // Guardar modelo en la base de datos
         await modeloDAO.createModelo(modelo);
@@ -85,10 +86,50 @@ const obtenerStock = async (req, res) => {
 };
 
 
+
+
+
+
+
+const getAllModelosWithStatus = async (req, res) => {
+    try {
+        const modelos = await modeloDAO.getAllModelosWithStatus();
+        res.status(200).json(modelos);
+    } catch (error) {
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+};
+
+const toggleModelStatus = async (req, res) => {
+    try {
+
+        //console.log(req.body);
+        const { idmodelo, activo } = req.body;
+        
+        const modeloActualizado = await modeloDAO.toggleModelStatus(idmodelo, activo);
+        res.status(200).json(modeloActualizado);
+    } catch (error) {
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+};
+
+const getModelosOrdenados = async (req, res) => {
+    try {
+        const { criterio } = req.query;
+        const modelos = await modeloDAO.getModelosOrdenadosPor(criterio);
+        res.status(200).json(modelos);
+    } catch (error) {
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+};
+
 module.exports = {
     getModelos,
     crearModelo,
     getModelosConRatings,
     actualizarStock,
-    obtenerStock
+    obtenerStock,
+    getAllModelosWithStatus,
+    toggleModelStatus,
+    getModelosOrdenados
 };
