@@ -186,6 +186,31 @@ class ModeloDAO {
         }
     }
 
+
+
+    async getVentas() {
+        try {
+            const query = `
+                SELECT 
+                    m.*,
+                    COALESCE(AVG(r.rating), 0) as rating,
+                    COUNT(DISTINCT dp.iddetalles_pedidos) AS ventas
+                FROM modelo m
+                LEFT JOIN camisetas c ON m.idmodelo = c.modelo_id
+                LEFT JOIN detallesPedidos dp ON c.idcamisetas = ANY(dp.camisetas)
+                LEFT JOIN ratings r ON m.idmodelo = r.modelo_id
+                WHERE m.activo = true AND dp.precio_unitario IS NOT NULL
+                GROUP BY m.idmodelo
+                HAVING COUNT(DISTINCT dp.iddetalles_pedidos) > 0
+                ORDER BY ventas ASC
+            `;
+            const response = await db.query(query);
+            return response.rows;
+        } catch (error) {
+            console.error('Error al obtener estadísticas:', error);
+            throw new Error('Error interno del servidor');
+        }
+    }
 }
 
 module.exports = ModeloDAO;

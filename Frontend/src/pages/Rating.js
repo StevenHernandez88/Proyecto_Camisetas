@@ -23,7 +23,7 @@ function Rating() {
     try {
       await Promise.all(models.map(model => 
         axios.post('http://localhost:3000/ratings/crearRatings', { 
-          cliente_id: idusuario,
+          usuario_id: idusuario,
           modelo_id: model.modelId, 
           rating: ratings[model.modelId] || 0, 
           comentario: comments[model.modelId] || ''

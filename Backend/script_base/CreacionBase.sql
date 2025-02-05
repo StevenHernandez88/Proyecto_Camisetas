@@ -127,11 +127,11 @@ CREATE TABLE categoria (
 -- Creación de la tabla de ratings
 CREATE TABLE ratings (
     idratings SERIAL PRIMARY KEY,
-    cliente_id INT,
+    usuario_id INT,
     modelo_id INT,
     rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),
     comentario TEXT,
     fecha_rating TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (cliente_id) REFERENCES cliente(idcliente),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(idusuario),
     FOREIGN KEY (modelo_id) REFERENCES modelo(idmodelo)
 );

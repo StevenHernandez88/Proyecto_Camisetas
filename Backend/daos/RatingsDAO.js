@@ -15,10 +15,10 @@ class RatingsDAO {
     async createRatings(ratings) {
         try {
             const query = `
-                INSERT INTO ratings (cliente_id, modelo_id, rating, comentario) VALUES ($1, $2, $3, $4)
+                INSERT INTO ratings (usuario_id, modelo_id, rating, comentario) VALUES ($1, $2, $3, $4)
             `;
             const values = [
-                ratings.cliente_id,
+                ratings.usuario_id,
                 ratings.modelo_id,
                 ratings.rating,
                 ratings.comentario

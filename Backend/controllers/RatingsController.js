@@ -14,9 +14,11 @@ const getRatings = async (req, res) => {
 const crearRatings = async (req, res) => {
     try {
 
-        const { cliente_id, modelo_id, rating, comentario} = req.body;
+        //console.log(req.body);
 
-        const ratings = {cliente_id, modelo_id, rating, comentario};
+        const { usuario_id, modelo_id, rating, comentario} = req.body;
+
+        const ratings = {usuario_id, modelo_id, rating, comentario};
 
         // Guardar ratings en la base de datos
         await ratingsDAO.createRatings(ratings);

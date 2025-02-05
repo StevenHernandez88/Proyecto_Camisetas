@@ -6,6 +6,8 @@ import { DataContext } from '../services/DataProvider';
 const CustomizeTshirt = () => {
   const [talla, setTalla] = useState('');
   const [stamps, setStamps] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedStamp, setSelectedStamp] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -37,6 +39,10 @@ const CustomizeTshirt = () => {
       try {
         const response = await axios.get('http://localhost:3000/estampas/getEstampasActivas');
         setStamps(response.data);
+        
+        // Extract unique categories from stamps
+        const uniqueCategories = [...new Set(response.data.map(stamp => stamp.descripcion))];
+        setCategories(uniqueCategories);
       } catch (error) {
         console.error('Error al obtener las estampas:', error);
       }
@@ -44,6 +50,10 @@ const CustomizeTshirt = () => {
 
     fetchStamps();
   }, []);
+
+  const filteredStamps = selectedCategory === 'all' 
+    ? stamps 
+    : stamps.filter(stamp => stamp.descripcion === selectedCategory);
 
   const handleStampSelect = (stamp) => {
     setSelectedStamp(stamp);
@@ -146,13 +156,29 @@ const CustomizeTshirt = () => {
 
       <button onClick={handleCustomization}>Añadir al carrito</button>
 
-      <h2>Seleccione una Estampa</h2>
-      <div className="stamp-gallery">
-        {stamps.map((stamp, index) => (
-          <div key={index} className="stamp-item" onClick={() => handleStampSelect(stamp)}>
-            <img src={stamp.url_imagen} alt={`Estampa ${index + 1}`} />
-          </div>
-        ))}
+      <div className="stamps-section">
+        <h2>Seleccione una Estampa</h2>
+        
+        <select 
+          value={selectedCategory} 
+          onChange={(e) => setSelectedCategory(e.target.value)}
+          className="category-select"
+        >
+          <option value="all">Todas las categorías</option>
+          {categories.map((category, index) => (
+            <option key={index} value={category}>{category}</option>
+          ))}
+        </select>
+
+        <div className="stamp-gallery">
+          {filteredStamps.map((stamp, index) => (
+            <div key={index} className="stamp-item" onClick={() => handleStampSelect(stamp)}>
+              <img src={stamp.url_imagen} alt={stamp.nombre} />
+              <p className="stamp-name">{stamp.nombre}</p>
+              <p className="stamp-category">{stamp.descripcion}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="comentarios-section">

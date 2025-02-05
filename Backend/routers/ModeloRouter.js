@@ -1,5 +1,5 @@
 const express = require('express');
-const { getModelos, crearModelo, getModelosConRatings, actualizarStock, obtenerStock, getAllModelosWithStatus, toggleModelStatus, getModelosOrdenados} = require('../controllers/ModeloController');
+const { getModelos, crearModelo, getModelosConRatings, actualizarStock, obtenerStock, getAllModelosWithStatus, toggleModelStatus, getModelosOrdenados, getVentas} = require('../controllers/ModeloController');
 const multer = require('multer');
 const router = express.Router();
 
@@ -18,5 +18,7 @@ router.get('/modelo/getAllModelosWithStatus', getAllModelosWithStatus);
 router.post('/modelo/toggleModelStatus', toggleModelStatus);
 
 router.get('/modelo/getModelosOrdenados', getModelosOrdenados);
+router.get('/modelo/getVentas', getVentas);
+
 
 module.exports = router;

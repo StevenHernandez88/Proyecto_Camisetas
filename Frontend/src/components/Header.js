@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import BlancaAlgodon from '../img/Blanca_algodon.jpg';
 import { DataContext } from "../services/DataProvider";
 import { useNavigate } from 'react-router-dom';
+import 'boxicons/css/boxicons.min.css'; // Ensure Box Icons are imported
 
 export const Header = () => {
   const { carrito, menu, setMenu, idusuario, rol_id, handleLogout } = useContext(DataContext);
@@ -22,35 +23,31 @@ export const Header = () => {
   };
 
   const handleProfileClick = () => {
-  
     const role = Number(rol_id); // Convertir rol_id a número
     
     if (idusuario) {
-      if(role === 1){
-        //console.log('Redirigiendo a /admin');
-        navigate('/admin');
-      }
-      if (role === 2) {
-        //console.log('Redirigiendo a /perfilHistorialCompra');
-        navigate('/perfilHistorialCompra');
-      } else if (role === 3) {
-        //console.log('Redirigiendo a /perfilEstampasSubidas');
-        navigate('/perfilEstampasSubidas');
-      } else {
-        console.log('Rol no reconocido');
+      switch(role) {
+        case 1:
+          navigate('/admin');
+          break;
+        case 2:
+          navigate('/perfilHistorialCompra');
+          break;
+        case 3:
+          navigate('/perfilEstampasSubidas');
+          break;
+        default:
+          console.log('Rol no reconocido');
+          navigate('/login');
       }
     } else {
-      console.log('Usuario no autenticado, redirigiendo a login');
       navigate('/login');
     }
   };
   
-  
-
-
   return (
     <header>
-      <a href='#'>
+      <a href='/'>
         <div className='logo'>
           <img src={BlancaAlgodon} alt="logo" width="100"></img>
         </div>
@@ -69,12 +66,12 @@ export const Header = () => {
 
       {idusuario && rol_id && (
         <div className="user-icon" onClick={handleProfileClick}>
-          <box-icon name="user-circle" size="lg"></box-icon>
+          <i className='bx bx-user-circle' style={{fontSize: '45px', color: 'black'}}></i>
         </div>
       )}
 
       <div className='cart' onClick={toggleMenu}>
-        <box-icon name="cart"></box-icon>
+        <i className='bx bx-cart' style={{fontSize: '45px'}}></i>
         <span className='item_total'>{itemsCount}</span>
       </div>
     </header>

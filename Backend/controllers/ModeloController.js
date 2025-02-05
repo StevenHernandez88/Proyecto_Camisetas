@@ -86,11 +86,6 @@ const obtenerStock = async (req, res) => {
 };
 
 
-
-
-
-
-
 const getAllModelosWithStatus = async (req, res) => {
     try {
         const modelos = await modeloDAO.getAllModelosWithStatus();
@@ -123,6 +118,15 @@ const getModelosOrdenados = async (req, res) => {
     }
 };
 
+const getVentas = async (req, res) => {
+    try {
+        const stats = await modeloDAO.getVentas();
+        res.status(200).json(stats);
+    } catch (error) {
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+};
+
 module.exports = {
     getModelos,
     crearModelo,
@@ -131,5 +135,6 @@ module.exports = {
     obtenerStock,
     getAllModelosWithStatus,
     toggleModelStatus,
-    getModelosOrdenados
+    getModelosOrdenados,
+    getVentas
 };

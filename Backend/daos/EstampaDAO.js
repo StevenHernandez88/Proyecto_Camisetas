@@ -12,7 +12,7 @@ class EstampaDAO {
     async getAllEstampasActivas() {
         try {
             //console.log('Obteniendo todas las estampas');
-            const response = await db.query('SELECT * FROM estampas where activo=true');
+            const response = await db.query('Select es.*, ca.descripcion from estampas es, categoria ca where es.categoria_id = ca.idcategoria and es.activo = true');
             return response.rows;
         } catch (error) {
             console.error('Error al obtener estampas:', error.message, error.stack);
