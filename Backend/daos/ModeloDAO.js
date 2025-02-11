@@ -24,14 +24,15 @@ class ModeloDAO {
     async createModelo(modelo) {
         try {
             const query = `
-                INSERT INTO modelo ( descripcion, material, rating_id, url_modelo, stock) VALUES ($1, $2, $3, $4, $5)
+                INSERT INTO modelo ( descripcion, material, rating_id, url_modelo, stock, activo) VALUES ($1, $2, $3, $4, $5,$6)
             `;
             const values = [
                 modelo.descripcion,
                 modelo.material,
                 modelo.rating_id,
                 modelo.url_modelo,
-                modelo.stock
+                modelo.stock,
+                modelo.activo
             ];
             await db.query(query, values);
             console.log('modelo creado en la base de datos');
@@ -202,7 +203,7 @@ class ModeloDAO {
                 WHERE m.activo = true AND dp.precio_unitario IS NOT NULL
                 GROUP BY m.idmodelo
                 HAVING COUNT(DISTINCT dp.iddetalles_pedidos) > 0
-                ORDER BY ventas ASC
+                ORDER BY ventas DESC
             `;
             const response = await db.query(query);
             return response.rows;

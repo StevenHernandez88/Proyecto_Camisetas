@@ -17,6 +17,7 @@ const crearEstampa = async (req, res) => {
 
         const { nombre, descripcion, artista_id, categoria_id } = req.body;
         const file = req.file;
+        const activo = true;
 
         if (!file) {
             return res.status(400).json({ error: 'No se ha proporcionado ningún archivo de imagen' });
@@ -25,7 +26,7 @@ const crearEstampa = async (req, res) => {
         // Subir imagen a Google Cloud y obtener la URL pública
         const url_imagen = await uploadImageToGoogleCloud(file);
         
-        const estampa = {nombre, descripcion, artista_id, url_imagen, categoria_id};
+        const estampa = {nombre, descripcion, artista_id, url_imagen, categoria_id, activo};
 
         // Guardar estampa en la base de datos
         await estampaDAO.createEstampa(estampa);

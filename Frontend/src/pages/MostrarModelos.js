@@ -21,7 +21,7 @@ const MostrarModelos = () => {
                     response = await axios.get('http://localhost:3000/modelo/getModelosOrdenados?criterio=material');
                     break;
                 case 'popularity':
-                    response = await axios.get('http://localhost:3000/modelo/getModelosConRatings');
+                    response = await axios.get('http://localhost:3000/modelo/getVentas');
                     // For popularity, use the same data structure as default
                     break;
                 default:
@@ -96,7 +96,7 @@ const MostrarModelos = () => {
                             </div>
                         )}
                         <div className="modelo-info">
-                            <h2>{model.modelo || `Modelo ${index + 1}`}</h2>
+                            
                             {model.rating !== undefined && (
                                 <div className="rating">
                                     {renderStars(model.rating)}

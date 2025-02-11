@@ -23,14 +23,15 @@ class EstampaDAO {
     async createEstampa(estampa) {
         try {
             const query = `
-                INSERT INTO estampas (nombre, descripcion, artista_id, url_imagen, categoria_id) VALUES ($1, $2, $3, $4, $5)
+                INSERT INTO estampas (nombre, descripcion, artista_id, url_imagen, categoria_id, activo) VALUES ($1, $2, $3, $4, $5, $6)
             `;
             const values = [
                 estampa.nombre,
                 estampa.descripcion,
                 estampa.artista_id,
                 estampa.url_imagen,
-                estampa.categoria_id
+                estampa.categoria_id,
+                estampa.activo
             ];
             await db.query(query, values);
             console.log('Estampa creada en la base de datos');

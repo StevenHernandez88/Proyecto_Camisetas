@@ -53,7 +53,7 @@ class RatingsDAO {
             const query = `
                 SELECT r.rating, r.comentario, r.fecha_rating, u.nombre
                 FROM ratings r
-                JOIN usuarios u ON r.cliente_id = u.idusuario
+                JOIN usuarios u ON r.usuario_id = u.idusuario
                 WHERE r.modelo_id = $1
                 ORDER BY r.fecha_rating DESC
             `;

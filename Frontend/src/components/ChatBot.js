@@ -50,7 +50,7 @@ const ChatBot = () => {
     } else if (lowerMessage.includes('información general') || lowerMessage.includes('empresa') || lowerMessage.includes('quienes son ustedes')) {
       botResponse = storeInfo.generalInfo;
     } else if (lowerMessage.includes('cantidad maxima') || lowerMessage.includes('maxima')) {
-      botResponse = `La cantidad máxima de camisetas es de 100 camisetas.`;
+      botResponse = `La cantidad máxima de camisetas depende del stock de camisetas.`;
     } else if (lowerMessage.includes('estampado') || lowerMessage.includes('estampado personalizado') || lowerMessage.includes('personalizado') || lowerMessage.includes('personalizar')) {
       botResponse = `Claro que sí, puedes personalizar los modelos con las estampas de los artistas.`;
     } else if (lowerMessage.includes('escoger estampas') || lowerMessage.includes('estampas propias') || lowerMessage.includes('mis propias estampas') || lowerMessage.includes('las mias')) {
